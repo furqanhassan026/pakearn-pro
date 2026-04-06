@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>PakEarn Pro - Online Earning Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #f5c842;
+    --gold2: #e0a800;
+    --dark: #0a0c14;
+    --card: #111523;
+    --card2: #181d2e;
+    --green: #00e676;
+    --red: #ff4d4d;
+    --blue: #2979ff;
+    --purple: #7c4dff;
+    --text: #e8eaf6;
+    --muted: #7986a3;
+    --border: rgba(245,200,66,0.15);
+    --radius: 18px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.55);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { width:100%; min-height:100vh; background:var(--dark); font-family:'Poppins',sans-serif; color:var(--text); overflow-x:hidden; }
+
+  /* MOBILE FRAME */
+  .app-shell {
+    max-width:430px;
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--dark);
+    position:relative;
+    padding-bottom:80px;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 20px 12px;
+    background:linear-gradient(135deg,#0d1020 0%,#141828 100%);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .topbar-logo {
+    font-family:'Orbitron',sans-serif;
+    font-size:18px;
+    font-weight:900;
+    background:linear-gradient(90deg,var(--gold),#fff9c4,var(--gold2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    letter-spacing:1px;
+  }
+  .topbar-logo span { font-size:11px; display:block; color:var(--muted); font-family:'Poppins',sans-serif; font-weight:400; letter-spacing:0; -webkit-text-fill-color:var(--muted); }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .notif-btn {
+    width:36px; height:36px; border-radius:50%; background:var(--card2);
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative;
+  }
+  .notif-dot { width:8px; height:8px; background:var(--gold); border-radius:50%; position:absolute; top:5px; right:5px; }
+  .avatar-btn {
+    width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold2));
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:#000; cursor:pointer;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background:linear-gradient(90deg,#1a1f35,#111523);
+    border-bottom:1px solid var(--border);
+    overflow:hidden;
+    padding:6px 0;
+  }
+  .ticker-inner {
+    display:flex;
+    gap:40px;
+    animation:ticker 20s linear infinite;
+    white-space:nowrap;
+    width:max-content;
+  }
+  .ticker-item { font-size:11px; color:var(--gold); font-weight:600; letter-spacing:.5px; }
+  .ticker-item span { color:var(--green); }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* HERO BANNER */
+  .hero {
+    margin:16px;
+    border-radius:var(--radius);
+    background:linear-gradient(135deg,#0d1a3a 0%,#1a0d2e 50%,#0d1a1a 100%);
+    border:1px solid var(--border);
+    padding:24px 20px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .hero::before {
+    content:'';
+    position:absolute;
+    top:-40px; right:-40px;
+    width:180px; height:180px;
+    background:radial-gradient(circle,rgba(245,200,66,0.18) 0%,transparent 70%);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .hero::after {
+    content:'';
+    position:absolute;
+    bottom:-30px; left:-30px;
+    width:130px; height:130px;
+    background:radial-gradient(circle,rgba(41,121,255,0.12) 0%,transparent 70%);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .hero-badge {
+    display:inline-block;
+    background:rgba(245,200,66,0.12);
+    border:1px solid rgba(245,200,66,0.35);
+    color:var(--gold);
+    font-size:10px;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:30px;
+    letter-spacing:1px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  .hero h1 {
+    font-family:'Orbitron',sans-serif;
+    font-size:22px;
+    font-weight:900;
+    line-height:1.25;
+    background:linear-gradient(90deg,#fff,var(--gold),#fff9c4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:8px;
+  }
+  .hero p { font-size:12px; color:var(--muted); line-height:1.6; margin-bottom:18px; }
+  .hero-btns { display:flex; gap:10px; }
+  .btn-primary {
+    flex:1; padding:12px; border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000; font-weight:700; font-size:13px;
+    border:none; cursor:pointer; text-align:center;
+    box-shadow:0 4px 20px rgba(245,200,66,0.35);
+    transition:transform .2s, box-shadow .2s;
+    font-family:'Poppins',sans-serif;
+  }
+  .btn-primary:active { transform:scale(0.97); }
+  .btn-outline {
+    flex:1; padding:12px; border-radius:12px;
+    background:transparent;
+    color:var(--gold); font-weight:700; font-size:13px;
+    border:1.5px solid var(--gold); cursor:pointer; text-align:center;
+    transition:all .2s;
+    font-family:'Poppins',sans-serif;
+  }
+  .btn-outline:active { background:rgba(245,200,66,0.1); }
+  .hero-stats {
+    display:flex; gap:0; margin-top:16px;
+    background:rgba(0,0,0,0.25);
+    border-radius:12px;
+    border:1px solid var(--border);
+    overflow:hidden;
+  }
+  .hs { flex:1; padding:10px 8px; text-align:center; border-right:1px solid var(--border); }
+  .hs:last-child { border-right:none; }
+  .hs-val { font-size:15px; font-weight:800; color:var(--gold); font-family:'Orbitron',sans-serif; }
+  .hs-lbl { font-size:9px; color:var(--muted); margin-top:2px; text-transform:uppercase; letter-spacing:.5px; }
+
+  /* BALANCE CARD */
+  .balance-card {
+    margin:0 16px 16px;
+    border-radius:var(--radius);
+    background:linear-gradient(135deg,#1a1f38,#0f1220);
+    border:1px solid var(--border);
+    padding:20px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .balance-card::before {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold2),transparent);
+  }
+  .bc-label { font-size:11px; color:var(--muted); font-weight:500; letter-spacing:.5px; text-transform:uppercase; }
+  .bc-amount { font-family:'Orbitron',sans-serif; font-size:28px; font-weight:900; color:#fff; margin:4px 0 2px; }
+  .bc-amount span { font-size:16px; color:var(--gold); }
+  .bc-sub { font-size:11px; color:var(--green); font-weight:600; }
+  .bc-actions { display:flex; gap:10px; margin-top:16px; }
+  .bc-btn {
+    flex:1; padding:11px 8px; border-radius:12px;
+    border:none; cursor:pointer; font-weight:700; font-size:12px;
+    font-family:'Poppins',sans-serif; text-align:center; transition:all .2s;
+  }
+  .bc-btn-dep { background:linear-gradient(135deg,#00c853,#00e676); color:#000; }
+  .bc-btn-with { background:linear-gradient(135deg,#2979ff,#448aff); color:#fff; }
+  .bc-btn-ref { background:linear-gradient(135deg,#7c4dff,#b388ff); color:#fff; }
+
+  /* SECTION TITLE */
+  .sec-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:4px 16px 12px;
+  }
+  .sec-title { font-size:16px; font-weight:700; color:#fff; }
+  .sec-title span { color:var(--gold); }
+  .sec-all { font-size:11px; color:var(--gold); font-weight:600; cursor:pointer; }
+
+  /* QUICK ACTIONS */
+  .quick-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:0 16px 20px;
+  }
+  .qa-item {
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    cursor:pointer;
+    transition:transform .2s;
+  }
+  .qa-item:active { transform:scale(0.93); }
+  .qa-icon {
+    width:52px; height:52px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .qa-icon::before {
+    content:'';
+    position:absolute; inset:0;
+    opacity:.12;
+  }
+  .qa-dep .qa-icon { background:linear-gradient(135deg,#004d20,#00c853); }
+  .qa-with .qa-icon { background:linear-gradient(135deg,#0d2b6e,#2979ff); }
+  .qa-ref .qa-icon { background:linear-gradient(135deg,#2d1a6e,#7c4dff); }
+  .qa-hist .qa-icon { background:linear-gradient(135deg,#3d2000,#f5c842); }
+  .qa-earn .qa-icon { background:linear-gradient(135deg,#1a0d30,#e040fb); }
+  .qa-plan .qa-icon { background:linear-gradient(135deg,#0d2020,#00bcd4); }
+  .qa-sup .qa-icon { background:linear-gradient(135deg,#1a1a0d,#cddc39); }
+  .qa-prof .qa-icon { background:linear-gradient(135deg,#1a0d0d,#ff5722); }
+  .qa-lbl { font-size:10px; color:var(--muted); font-weight:600; text-align:center; line-height:1.3; }
+
+  /* PLANS */
+  .plans-scroll {
+    display:flex;
+    gap:12px;
+    padding:0 16px 4px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    margin-bottom:20px;
+  }
+  .plans-scroll::-webkit-scrollbar { display:none; }
+  .plan-card {
+    min-width:180px;
+    border-radius:var(--radius);
+    padding:18px 16px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .2s, box-shadow .2s;
+    flex-shrink:0;
+    border:1px solid transparent;
+  }
+  .plan-card:active { transform:scale(0.97); }
+  .plan-card.free { background:linear-gradient(135deg,#001a0d,#003320); border-color:rgba(0,230,118,0.3); }
+  .plan-card.silver { background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:rgba(176,190,197,0.3); }
+  .plan-card.gold { background:linear-gradient(135deg,#1a1200,#332800); border-color:rgba(245,200,66,0.4); }
+  .plan-card.platinum { background:linear-gradient(135deg,#0d1a2e,#1a2e4a); border-color:rgba(41,121,255,0.3); }
+  .plan-card.diamond { background:linear-gradient(135deg,#1a0d2e,#2e1a4a); border-color:rgba(124,77,255,0.35); }
+  .plan-card.elite { background:linear-gradient(135deg,#2e0d0d,#4a1a1a); border-color:rgba(255,77,77,0.3); }
+  .plan-card.royal { background:linear-gradient(135deg,#1a0d1a,#2e1a3a); border-color:rgba(224,64,251,0.3); }
+  .plan-badge {
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:30px;
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:10px;
+  }
+  .free .plan-badge { background:rgba(0,230,118,0.15); color:var(--green); border:1px solid rgba(0,230,118,0.3); }
+  .silver .plan-badge { background:rgba(176,190,197,0.12); color:#b0bec5; border:1px solid rgba(176,190,197,0.25); }
+  .gold .plan-badge { background:rgba(245,200,66,0.12); color:var(--gold); border:1px solid rgba(245,200,66,0.3); }
+  .platinum .plan-badge { background:rgba(41,121,255,0.12); color:#82b1ff; border:1px solid rgba(41,121,255,0.25); }
+  .diamond .plan-badge { background:rgba(124,77,255,0.12); color:#b388ff; border:1px solid rgba(124,77,255,0.25); }
+  .elite .plan-badge { background:rgba(255,77,77,0.1); color:#ff8a80; border:1px solid rgba(255,77,77,0.25); }
+  .royal .plan-badge { background:rgba(224,64,251,0.1); color:#ea80fc; border:1px solid rgba(224,64,251,0.25); }
+  .plan-price { font-family:'Orbitron',sans-serif; font-size:13px; font-weight:900; color:#fff; margin-bottom:2px; }
+  .plan-daily { font-size:11px; color:var(--muted); margin-bottom:12px; }
+  .plan-daily strong { color:var(--green); }
+  .plan-stat { display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-bottom:4px; }
+  .plan-stat strong { color:var(--text); font-weight:600; }
+  .plan-btn {
+    width:100%; margin-top:12px; padding:9px; border-radius:10px;
+    border:none; font-weight:700; font-size:11px; cursor:pointer;
+    font-family:'Poppins',sans-serif; transition:all .2s;
+  }
+  .free .plan-btn { background:linear-gradient(135deg,var(--green),#00c853); color:#000; }
+  .silver .plan-btn { background:linear-gradient(135deg,#90a4ae,#b0bec5); color:#000; }
+  .gold .plan-btn { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#000; }
+  .platinum .plan-btn { background:linear-gradient(135deg,#2979ff,#448aff); color:#fff; }
+  .diamond .plan-btn { background:linear-gradient(135deg,#7c4dff,#b388ff); color:#fff; }
+  .elite .plan-btn { background:linear-gradient(135deg,#ff4d4d,#ff8a80); color:#fff; }
+  .royal .plan-btn { background:linear-gradient(135deg,#e040fb,#ea80fc); color:#fff; }
+  .plan-hot {
+    position:absolute; top:10px; right:10px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000; font-size:8px; font-weight:800; padding:2px 7px;
+    border-radius:30px; text-transform:uppercase; letter-spacing:.5px;
+  }
+
+  /* REFERRAL BANNER */
+  .ref-banner {
+    margin:0 16px 20px;
+    border-radius:var(--radius);
+    background:linear-gradient(135deg,#1a0d2e,#2e1a4a,#1a0d2e);
+    border:1px solid rgba(124,77,255,0.3);
+    padding:20px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 8px 32px rgba(124,77,255,0.15);
+  }
+  .ref-banner::before {
+    content:'';
+    position:absolute;
+    top:-30px; right:-30px;
+    width:120px; height:120px;
+    background:radial-gradient(circle,rgba(124,77,255,0.25) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .ref-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
+  .ref-pct { font-family:'Orbitron',sans-serif; font-size:36px; font-weight:900; color:var(--gold); line-height:1; }
+  .ref-pct-lbl { font-size:11px; color:#b388ff; font-weight:600; margin-top:2px; }
+  .ref-days {
+    background:rgba(245,200,66,0.12); border:1px solid rgba(245,200,66,0.25);
+    border-radius:10px; padding:8px 12px; text-align:center;
+  }
+  .ref-days-num { font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--gold); }
+  .ref-days-lbl { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+  .ref-desc { font-size:12px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+  .ref-link-box {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(0,0,0,0.3); border:1px solid rgba(124,77,255,0.25);
+    border-radius:10px; padding:10px 12px;
+  }
+  .ref-link-text { flex:1; font-size:11px; color:var(--muted); font-family:monospace; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ref-copy-btn {
+    padding:6px 14px; border-radius:8px;
+    background:linear-gradient(135deg,#7c4dff,#b388ff);
+    color:#fff; font-size:11px; font-weight:700; border:none; cursor:pointer;
+    font-family:'Poppins',sans-serif; white-space:nowrap;
+  }
+
+  /* HOW IT WORKS */
+  .hiw-list { padding:0 16px; margin-bottom:20px; }
+  .hiw-item {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .hiw-item:last-child { border-bottom:none; }
+  .hiw-num {
+    width:36px; height:36px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Orbitron',sans-serif; font-size:14px; font-weight:900;
+  }
+  .hiw-num-1 { background:linear-gradient(135deg,#003320,#00c853); color:#fff; }
+  .hiw-num-2 { background:linear-gradient(135deg,#0d2b6e,#2979ff); color:#fff; }
+  .hiw-num-3 { background:linear-gradient(135deg,#2d1a6e,#7c4dff); color:#fff; }
+  .hiw-num-4 { background:linear-gradient(135deg,#1a1200,#f5c842); color:#000; }
+  .hiw-content h4 { font-size:13px; font-weight:700; color:#fff; margin-bottom:3px; }
+  .hiw-content p { font-size:11px; color:var(--muted); line-height:1.5; }
+
+  /* CALCULATOR */
+  .calc-box {
+    margin:0 16px 20px;
+    border-radius:var(--radius);
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:20px;
+  }
+  .calc-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:16px; }
+  .calc-title span { color:var(--gold); }
+  .calc-row { margin-bottom:14px; }
+  .calc-label { font-size:11px; color:var(--muted); margin-bottom:6px; font-weight:600; }
+  .calc-input {
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:var(--card2); border:1px solid var(--border);
+    color:#fff; font-size:14px; font-weight:600; font-family:'Poppins',sans-serif;
+    outline:none; transition:border .2s;
+  }
+  .calc-input:focus { border-color:var(--gold); }
+  .calc-select {
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:var(--card2); border:1px solid var(--border);
+    color:#fff; font-size:13px; font-family:'Poppins',sans-serif;
+    outline:none; cursor:pointer;
+    appearance:none;
+  }
+  .calc-result {
+    background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(245,200,66,0.03));
+    border:1px solid rgba(245,200,66,0.2);
+    border-radius:12px; padding:16px;
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    margin-top:14px;
+  }
+  .cr-item { text-align:center; }
+  .cr-val { font-family:'Orbitron',sans-serif; font-size:15px; font-weight:900; color:var(--gold); }
+  .cr-lbl { font-size:10px; color:var(--muted); margin-top:3px; text-transform:uppercase; letter-spacing:.4px; }
+  .calc-btn {
+    width:100%; padding:13px; border-radius:12px; margin-top:14px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000; font-weight:800; font-size:13px; border:none; cursor:pointer;
+    font-family:'Poppins',sans-serif; box-shadow:0 4px 20px rgba(245,200,66,0.3);
+  }
+
+  /* TRANSACTION LIST */
+  .txn-list { padding:0 16px; margin-bottom:20px; }
+  .txn-item {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--border);
+  }
+  .txn-item:last-child { border-bottom:none; }
+  .txn-icon {
+    width:40px; height:40px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  .txn-dep-i { background:rgba(0,230,118,0.1); border:1px solid rgba(0,230,118,0.2); color:var(--green); }
+  .txn-with-i { background:rgba(41,121,255,0.1); border:1px solid rgba(41,121,255,0.2); color:#82b1ff; }
+  .txn-ref-i { background:rgba(124,77,255,0.1); border:1px solid rgba(124,77,255,0.2); color:#b388ff; }
+  .txn-earn-i { background:rgba(245,200,66,0.1); border:1px solid rgba(245,200,66,0.2); color:var(--gold); }
+  .txn-info { flex:1; }
+  .txn-name { font-size:13px; font-weight:600; color:#fff; }
+  .txn-date { font-size:10px; color:var(--muted); margin-top:2px; }
+  .txn-amt { font-size:14px; font-weight:700; font-family:'Orbitron',sans-serif; }
+  .pos { color:var(--green); }
+  .neg { color:var(--red); }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    position:fixed;
+    bottom:0; left:50%; transform:translateX(-50%);
+    width:100%; max-width:430px;
+    background:rgba(17,21,35,0.97);
+    border-top:1px solid var(--border);
+    display:flex; align-items:center;
+    padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+    z-index:200;
+    backdrop-filter:blur(20px);
+  }
+  .nav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+    cursor:pointer; padding:4px 0; transition:all .2s;
+    position:relative;
+  }
+  .nav-icon { font-size:20px; transition:transform .2s; }
+  .nav-lbl { font-size:9px; font-weight:600; color:var(--muted); letter-spacing:.5px; text-transform:uppercase; transition:color .2s; }
+  .nav-item.active .nav-lbl { color:var(--gold); }
+  .nav-item.active .nav-dot {
+    position:absolute;
+    bottom:-8px; left:50%; transform:translateX(-50%);
+    width:18px; height:3px; background:var(--gold); border-radius:2px;
+  }
+  .nav-center-btn {
+    width:56px; height:56px; border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    display:flex; align-items:center; justify-content:center;
+    margin-top:-28px;
+    box-shadow:0 4px 24px rgba(245,200,66,0.45);
+    flex-shrink:0;
+    cursor:pointer;
+    border:3px solid var(--dark);
+    transition:transform .2s;
+  }
+  .nav-center-btn:active { transform:scale(0.93) translateY(2px); }
+
+  /* MODALS */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    z-index:300; display:none; align-items:flex-end;
+    backdrop-filter:blur(4px);
+  }
+  .modal-overlay.active { display:flex; }
+  .modal-sheet {
+    width:100%; max-width:430px; margin:0 auto;
+    background:var(--card);
+    border-radius:24px 24px 0 0;
+    padding:0 0 calc(24px + env(safe-area-inset-bottom));
+    max-height:90vh;
+    overflow-y:auto;
+    animation:slideUp .3s cubic-bezier(.32,1.4,.55,1);
+  }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .modal-handle {
+    width:40px; height:4px; background:rgba(255,255,255,0.15);
+    border-radius:2px; margin:12px auto 0;
+  }
+  .modal-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 20px 0;
+    margin-bottom:4px;
+  }
+  .modal-title { font-size:17px; font-weight:700; color:#fff; }
+  .modal-title span { color:var(--gold); }
+  .modal-close {
+    width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:none; cursor:pointer;
+    color:var(--muted); font-size:16px; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-body { padding:16px 20px 0; }
+  .form-group { margin-bottom:14px; }
+  .form-label { font-size:11px; color:var(--muted); font-weight:600; margin-bottom:6px; display:block; letter-spacing:.4px; text-transform:uppercase; }
+  .form-input {
+    width:100%; padding:13px 14px; border-radius:12px;
+    background:var(--card2); border:1.5px solid var(--border);
+    color:#fff; font-size:14px; font-family:'Poppins',sans-serif;
+    outline:none; transition:border .2s;
+  }
+  .form-input:focus { border-color:var(--gold); }
+  .form-select {
+    width:100%; padding:13px 14px; border-radius:12px;
+    background:var(--card2); border:1.5px solid var(--border);
+    color:#fff; font-size:13px; font-family:'Poppins',sans-serif;
+    outline:none; appearance:none; cursor:pointer;
+  }
+  .payment-methods { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  .pm-btn {
+    flex:1; min-width:calc(50% - 4px); padding:11px 8px; border-radius:10px;
+    background:var(--card2); border:1.5px solid var(--border);
+    color:var(--muted); font-size:11px; font-weight:700; cursor:pointer;
+    text-align:center; transition:all .2s; font-family:'Poppins',sans-serif;
+  }
+  .pm-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(245,200,66,0.06); }
+  .info-box {
+    background:rgba(245,200,66,0.06); border:1px solid rgba(245,200,66,0.2);
+    border-radius:10px; padding:12px; margin-bottom:14px;
+    font-size:11px; color:var(--muted); line-height:1.6;
+  }
+  .info-box strong { color:var(--gold); }
+  .submit-btn {
+    width:100%; padding:14px; border-radius:14px; margin-top:4px;
+    border:none; font-weight:800; font-size:14px; cursor:pointer;
+    font-family:'Poppins',sans-serif; transition:all .2s;
+  }
+  .dep-submit { background:linear-gradient(135deg,#00c853,#00e676); color:#000; box-shadow:0 4px 20px rgba(0,200,83,0.3); }
+  .with-submit { background:linear-gradient(135deg,#2979ff,#448aff); color:#fff; box-shadow:0 4px 20px rgba(41,121,255,0.3); }
+
+  /* PLANS MODAL */
+  .plans-grid { display:flex; flex-direction:column; gap:12px; }
+  .plan-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px; border-radius:14px;
+    border:1px solid var(--border);
+    cursor:pointer; transition:all .2s;
+  }
+  .plan-row.free { background:linear-gradient(135deg,rgba(0,77,32,.5),rgba(0,51,32,.3)); border-color:rgba(0,230,118,0.25); }
+  .plan-row.silver { background:linear-gradient(135deg,rgba(26,26,46,.8),rgba(22,33,62,.5)); border-color:rgba(176,190,197,0.2); }
+  .plan-row.gold { background:linear-gradient(135deg,rgba(26,18,0,.8),rgba(51,40,0,.4)); border-color:rgba(245,200,66,0.3); }
+  .plan-row.platinum { background:linear-gradient(135deg,rgba(13,26,46,.8),rgba(26,46,74,.4)); border-color:rgba(41,121,255,0.25); }
+  .plan-row.diamond { background:linear-gradient(135deg,rgba(26,13,46,.8),rgba(46,26,74,.4)); border-color:rgba(124,77,255,0.25); }
+  .plan-row.elite { background:linear-gradient(135deg,rgba(46,13,13,.8),rgba(74,26,26,.4)); border-color:rgba(255,77,77,0.2); }
+  .plan-row.royal { background:linear-gradient(135deg,rgba(26,13,26,.8),rgba(46,26,58,.4)); border-color:rgba(224,64,251,0.25); }
+  .pr-left h4 { font-size:14px; font-weight:700; color:#fff; }
+  .pr-left p { font-size:11px; color:var(--muted); margin-top:2px; }
+  .pr-right { text-align:right; }
+  .pr-roi { font-family:'Orbitron',sans-serif; font-size:18px; font-weight:900; }
+  .pr-daily { font-size:10px; color:var(--muted); margin-top:2px; }
+  .free .pr-roi { color:var(--green); }
+  .silver .pr-roi { color:#b0bec5; }
+  .gold .pr-roi { color:var(--gold); }
+  .platinum .pr-roi { color:#82b1ff; }
+  .diamond .pr-roi { color:#b388ff; }
+  .elite .pr-roi { color:#ff8a80; }
+  .royal .pr-roi { color:#ea80fc; }
+
+  /* REFERRAL MODAL */
+  .ref-stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .ref-stat-card {
+    background:var(--card2); border:1px solid var(--border);
+    border-radius:12px; padding:14px; text-align:center;
+  }
+  .rsc-val { font-family:'Orbitron',sans-serif; font-size:18px; font-weight:900; color:var(--gold); }
+  .rsc-lbl { font-size:10px; color:var(--muted); margin-top:4px; }
+
+  /* TOAST */
+  .toast {
+    position:fixed; top:80px; left:50%; transform:translateX(-50%) translateY(-20px);
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000; padding:10px 24px; border-radius:30px;
+    font-size:12px; font-weight:700; z-index:999;
+    opacity:0; transition:all .3s; pointer-events:none; white-space:nowrap;
+    font-family:'Poppins',sans-serif;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+  /* ANIMATED GLOW */
+  @keyframes pulse-glow {
+    0%,100% { box-shadow:0 0 20px rgba(245,200,66,0.3); }
+    50% { box-shadow:0 0 40px rgba(245,200,66,0.6); }
+  }
+  .pulse { animation:pulse-glow 2.5s ease-in-out infinite; }
+
+  /* SVG ICONS in nav */
+  .nav-svg { width:22px; height:22px; fill:none; stroke:var(--muted); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:stroke .2s; }
+  .nav-item.active .nav-svg { stroke:var(--gold); }
+
+  /* Live dot */
+  .live-dot { display:inline-block; width:6px; height:6px; background:var(--green); border-radius:50%; margin-right:4px; animation:blink 1.2s ease-in-out infinite; vertical-align:middle; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  /* PKR badge */
+  .pkr { font-size:10px; color:var(--muted); font-weight:500; }
+
+  /* Separator */
+  .sep { height:1px; background:var(--border); margin:0 16px 20px; }
+
+  /* Responsive */
+  @media (max-width:380px) {
+    .hero h1 { font-size:18px; }
+    .plan-card { min-width:160px; }
+    .bc-amount { font-size:24px; }
+  }
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-logo">PakEarn Pro<span>Pakistan's No.1 Earning Platform</span></div>
+    </div>
+    <div class="topbar-right">
+      <div class="notif-btn" onclick="showToast('You have 3 new notifications')">
+        <svg width="18" height="18" fill="none" stroke="#7986a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="avatar-btn" onclick="openModal('loginModal')">A</div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="live-dot"></span>LIVE: JazzCash Active</div>
+      <div class="ticker-item">Total Paid: <span>PKR 4,85,20,000+</span></div>
+      <div class="ticker-item">Members: <span>1,24,500+</span></div>
+      <div class="ticker-item">Referral: <span>17% Commission</span></div>
+      <div class="ticker-item">Earn Period: <span>50 Days</span></div>
+      <div class="ticker-item">Made in <span>Pakistan</span></div>
+      <div class="ticker-item"><span class="live-dot"></span>LIVE: JazzCash Active</div>
+      <div class="ticker-item">Total Paid: <span>PKR 4,85,20,000+</span></div>
+      <div class="ticker-item">Members: <span>1,24,500+</span></div>
+      <div class="ticker-item">Referral: <span>17% Commission</span></div>
+      <div class="ticker-item">Earn Period: <span>50 Days</span></div>
+      <div class="ticker-item">EasyPaisa: <span>Active</span></div>
+      <div class="ticker-item">Made in <span>Pakistan</span></div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero" style="margin-top:16px;">
+    <div class="hero-badge">Pakistan Trusted Platform</div>
+    <h1>Earn Daily<br/>in PKR</h1>
+    <p>Start from zero, grow your income with our transparent 50-day earning plans. Daily profits in Pakistani Rupees.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openModal('loginModal')">Start Earning Now</button>
+      <button class="btn-outline" onclick="openModal('plansModal')">View Plans</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val">17%</div><div class="hs-lbl">Referral</div></div>
+      <div class="hs"><div class="hs-val">50</div><div class="hs-lbl">Days Earn</div></div>
+      <div class="hs"><div class="hs-val">0</div><div class="hs-lbl">Min Start</div></div>
+      <div class="hs"><div class="hs-val">4.9</div><div class="hs-lbl">Rating</div></div>
+    </div>
+  </div>
+
+  <!-- BALANCE CARD -->
+  <div class="balance-card pulse">
+    <div class="bc-label">Total Balance</div>
+    <div class="bc-amount"><span>PKR</span> 0.00</div>
+    <div class="bc-sub">+PKR 0.00 today's earning</div>
+    <div class="bc-actions">
+      <button class="bc-btn bc-btn-dep" onclick="openModal('depositModal')">+ Deposit</button>
+      <button class="bc-btn bc-btn-with" onclick="openModal('withdrawModal')">Withdraw</button>
+      <button class="bc-btn bc-btn-ref" onclick="openModal('referralModal')">Referral</button>
+    </div>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="sec-header">
+    <div class="sec-title">Quick <span>Actions</span></div>
+  </div>
+  <div class="quick-grid">
+    <div class="qa-item qa-dep" onclick="openModal('depositModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#00e676" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
+      </div>
+      <div class="qa-lbl">Deposit</div>
+    </div>
+    <div class="qa-item qa-with" onclick="openModal('withdrawModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#82b1ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+      </div>
+      <div class="qa-lbl">Withdraw</div>
+    </div>
+    <div class="qa-item qa-ref" onclick="openModal('referralModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#b388ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="qa-lbl">Referral</div>
+    </div>
+    <div class="qa-item qa-hist" onclick="showToast('Transaction history coming soon')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#f5c842" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="qa-lbl">History</div>
+    </div>
+    <div class="qa-item qa-earn" onclick="openModal('plansModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#e040fb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="qa-lbl">Earn Plans</div>
+    </div>
+    <div class="qa-item qa-plan" onclick="openModal('calcModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#00bcd4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="qa-lbl">Calculator</div>
+    </div>
+    <div class="qa-item qa-sup" onclick="showToast('Support: pakarenpro@gmail.com')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#cddc39" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="qa-lbl">Install App</div>
+    </div>
+    <div class="qa-item qa-prof" onclick="openModal('loginModal')">
+      <div class="qa-icon">
+        <svg width="24" height="24" fill="none" stroke="#ff7043" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="qa-lbl">Profile</div>
+    </div>
+  </div>
+
+  <!-- EARNING PLANS -->
+  <div class="sec-header">
+    <div class="sec-title">Earning <span>Plans</span></div>
+    <div class="sec-all" onclick="openModal('plansModal')">See All</div>
+  </div>
+  <div class="plans-scroll">
+    <div class="plan-card free">
+      <div class="plan-badge">FREE STARTER</div>
+      <div class="plan-price">PKR 0</div>
+      <div class="plan-daily">Daily: <strong>PKR 5-10</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total ROI</span><strong>100%+</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('loginModal')">Start Free</button>
+    </div>
+    <div class="plan-card silver">
+      <div class="plan-badge">Silver</div>
+      <div class="plan-price">PKR 500</div>
+      <div class="plan-daily">Daily: <strong>PKR 15</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total Profit</span><strong>PKR 750</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('depositModal')">Activate</button>
+    </div>
+    <div class="plan-card gold">
+      <div class="plan-hot">HOT</div>
+      <div class="plan-badge">Gold</div>
+      <div class="plan-price">PKR 1,500</div>
+      <div class="plan-daily">Daily: <strong>PKR 60</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total Profit</span><strong>PKR 3,000</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('depositModal')">Activate</button>
+    </div>
+    <div class="plan-card platinum">
+      <div class="plan-badge">Platinum</div>
+      <div class="plan-price">PKR 5,000</div>
+      <div class="plan-daily">Daily: <strong>PKR 225</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total Profit</span><strong>PKR 11,250</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('depositModal')">Activate</button>
+    </div>
+    <div class="plan-card diamond">
+      <div class="plan-badge">Diamond</div>
+      <div class="plan-price">PKR 15,000</div>
+      <div class="plan-daily">Daily: <strong>PKR 750</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total Profit</span><strong>PKR 37,500</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('depositModal')">Activate</button>
+    </div>
+    <div class="plan-card royal">
+      <div class="plan-hot">VIP</div>
+      <div class="plan-badge">Royal</div>
+      <div class="plan-price">PKR 50,000</div>
+      <div class="plan-daily">Daily: <strong>PKR 3,000</strong></div>
+      <div class="plan-stat"><span>Duration</span><strong>50 Days</strong></div>
+      <div class="plan-stat"><span>Total Profit</span><strong>PKR 1,50,000</strong></div>
+      <div class="plan-stat"><span>Referral</span><strong>17%</strong></div>
+      <button class="plan-btn" onclick="openModal('depositModal')">Activate</button>
+    </div>
+  </div>
+
+  <!-- REFERRAL BANNER -->
+  <div class="sec-header" style="padding-top:4px;">
+    <div class="sec-title">Referral <span>Commission</span></div>
+  </div>
+  <div class="ref-banner">
+    <div class="ref-top">
+      <div>
+        <div class="ref-pct">17%</div>
+        <div class="ref-pct-lbl">Commission per referral</div>
+      </div>
+      <div class="ref-days">
+        <div class="ref-days-num">50</div>
+        <div class="ref-days-lbl">Days Period</div>
+      </div>
+    </div>
+    <div class="ref-desc">Share your unique link and earn <strong style="color:var(--gold)">17% commission</strong> on every deposit your referred friend makes. No limit on referrals — the more you refer, the more you earn!</div>
+    <div class="ref-link-box">
+      <div class="ref-link-text" id="refLinkText">https://paakearnpro.pk/ref/USER123</div>
+      <button class="ref-copy-btn" onclick="copyRefLink()">Copy</button>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="sec-header">
+    <div class="sec-title">How It <span>Works</span></div>
+  </div>
+  <div class="hiw-list">
+    <div class="hiw-item">
+      <div class="hiw-num hiw-num-1">1</div>
+      <div class="hiw-content">
+        <h4>Register Free Account</h4>
+        <p>Sign up with your mobile number. No investment required to create your account. Start completely free.</p>
+      </div>
+    </div>
+    <div class="hiw-item">
+      <div class="hiw-num hiw-num-2">2</div>
+      <div class="hiw-content">
+        <h4>Choose Your Earning Plan</h4>
+        <p>Pick from Free Starter to Royal plan. Deposit via JazzCash, EasyPaisa, or Bank Transfer.</p>
+      </div>
+    </div>
+    <div class="hiw-item">
+      <div class="hiw-num hiw-num-3">3</div>
+      <div class="hiw-content">
+        <h4>Earn Daily for 50 Days</h4>
+        <p>Your plan runs for 50 days. Profits are credited daily to your account balance automatically.</p>
+      </div>
+    </div>
+    <div class="hiw-item">
+      <div class="hiw-num hiw-num-4">4</div>
+      <div class="hiw-content">
+        <h4>Withdraw to JazzCash/EasyPaisa</h4>
+        <p>Withdraw your earnings anytime. Minimum PKR 100. Instant transfer to your mobile wallet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIT CALCULATOR -->
+  <div class="sec-header">
+    <div class="sec-title">Profit <span>Calculator</span></div>
+  </div>
+  <div class="calc-box" id="calcModal2">
+    <div class="calc-title">Calculate Your <span>Earnings</span></div>
+    <div class="calc-row">
+      <div class="calc-label">Investment Amount (PKR)</div>
+      <input class="calc-input" type="number" id="calcAmt" placeholder="Enter amount e.g. 5000" oninput="calculateProfit()"/>
+    </div>
+    <div class="calc-row">
+      <div class="calc-label">Select Plan</div>
+      <select class="calc-select" id="calcPlan" onchange="calculateProfit()">
+        <option value="free">Free Starter (PKR 0)</option>
+        <option value="silver">Silver - PKR 500</option>
+        <option value="gold" selected>Gold - PKR 1,500</option>
+        <option value="platinum">Platinum - PKR 5,000</option>
+        <option value="diamond">Diamond - PKR 15,000</option>
+        <option value="royal">Royal - PKR 50,000</option>
+      </select>
+    </div>
+    <div class="calc-result">
+      <div class="cr-item"><div class="cr-val" id="crDaily">PKR 0</div><div class="cr-lbl">Daily Profit</div></div>
+      <div class="cr-item"><div class="cr-val" id="crTotal">PKR 0</div><div class="cr-lbl">Total (50 Days)</div></div>
+      <div class="cr-item"><div class="cr-val" id="crRef">PKR 0</div><div class="cr-lbl">Ref Bonus (17%)</div></div>
+      <div class="cr-item"><div class="cr-val" id="crNet">PKR 0</div><div class="cr-lbl">Grand Total</div></div>
+    </div>
+    <button class="calc-btn" onclick="openModal('depositModal')">Invest Now</button>
+  </div>
+
+</div><!-- end app-shell -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="setNav(this)">
+    <svg class="nav-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <div class="nav-lbl">Home</div>
+    <div class="nav-dot"></div>
+  </div>
+  <div class="nav-item" onclick="openModal('plansModal'); setNav(this)">
+    <svg class="nav-svg" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <div class="nav-lbl">Plans</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+    <div class="nav-center-btn" onclick="openModal('depositModal')">
+      <svg width="24" height="24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </div>
+    <div style="font-size:9px; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-top:2px;">Deposit</div>
+  </div>
+  <div class="nav-item" onclick="openModal('referralModal'); setNav(this)">
+    <svg class="nav-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <div class="nav-lbl">Refer</div>
+  </div>
+  <div class="nav-item" onclick="openModal('loginModal'); setNav(this)">
+    <svg class="nav-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <div class="nav-lbl">Account</div>
+  </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- DEPOSIT MODAL -->
+<div class="modal-overlay" id="depositModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">Deposit <span>Funds</span></div>
+      <button class="modal-close" onclick="closeModal('depositModal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box">
+        <strong>Minimum Deposit: PKR 300</strong><br/>
+        Deposits are processed within 5-30 minutes after payment screenshot verification.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Payment Method</label>
+        <div class="payment-methods">
+          <button class="pm-btn active" onclick="selectPM(this,'JazzCash')">JazzCash</button>
+        </div>
+      </div>
+      <div class="info-box" id="depMethodInfo">
+        <strong>JazzCash Account:</strong><br/>
+        Name: FURQAN HASSAN<br/>
+        Number: 0316-4511488<br/>
+        <br/>
+        Send your deposit amount and upload screenshot below.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Plan</label>
+        <select class="form-select">
+          <option>Free Starter - PKR 0 (5-10/day)</option>
+          <option>Silver - PKR 500 (PKR 15/day)</option>
+          <option selected>Gold - PKR 1,500 (PKR 60/day)</option>
+          <option>Platinum - PKR 5,000 (PKR 225/day)</option>
+          <option>Diamond - PKR 15,000 (PKR 750/day)</option>
+          <option>Royal - PKR 50,000 (PKR 3,000/day)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Amount (PKR)</label>
+        <input class="form-input" type="number" placeholder="e.g. 1500" min="500"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Mobile Number</label>
+        <input class="form-input" type="tel" placeholder="03XX-XXXXXXX"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Transaction ID / Reference</label>
+        <input class="form-input" type="text" placeholder="Enter transaction ID"/>
+      </div>
+      <button class="submit-btn dep-submit" onclick="submitDeposit()">Submit Deposit Request</button>
+      <div style="height:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- WITHDRAW MODAL -->
+<div class="modal-overlay" id="withdrawModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">Withdraw <span>Funds</span></div>
+      <button class="modal-close" onclick="closeModal('withdrawModal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box">
+        <strong>Minimum Withdrawal: PKR 100</strong><br/>
+        Withdrawals are processed within 1-24 hours. Available balance: <strong>PKR 0.00</strong>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Withdrawal Method</label>
+        <div class="payment-methods">
+          <button class="pm-btn active" onclick="selectPM(this,'JazzCash')">JazzCash</button>
+          <button class="pm-btn" onclick="selectPM(this,'EasyPaisa')">EasyPaisa</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Number / IBAN</label>
+        <input class="form-input" type="tel" placeholder="03XX-XXXXXXX or IBAN"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Holder Name</label>
+        <input class="form-input" type="text" placeholder="Your full name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Withdrawal Amount (PKR)</label>
+        <input class="form-input" type="number" placeholder="Minimum PKR 100" min="100"/>
+      </div>
+      <div class="info-box">
+        <strong>Note:</strong> A service fee of <strong>2%</strong> applies on each withdrawal. Make sure your account details are correct before submitting.
+      </div>
+      <button class="submit-btn with-submit" onclick="submitWithdraw()">Submit Withdrawal</button>
+      <div style="height:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANS MODAL -->
+<div class="modal-overlay" id="plansModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">All <span>Plans</span></div>
+      <button class="modal-close" onclick="closeModal('plansModal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box" style="margin-bottom:16px;">
+        All plans run for <strong>50 Days</strong>. Referral commission: <strong>17%</strong>. Profits credited daily.
+      </div>
+      <div class="plans-grid">
+        <div class="plan-row free">
+          <div class="pr-left"><h4>Free Starter</h4><p>PKR 0 deposit | No risk</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 10</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row silver">
+          <div class="pr-left"><h4>Silver Plan</h4><p>PKR 500 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 15</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row gold">
+          <div class="pr-left"><h4>Gold Plan</h4><p>PKR 1,500 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 60</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row platinum">
+          <div class="pr-left"><h4>Platinum Plan</h4><p>PKR 5,000 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 225</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row diamond">
+          <div class="pr-left"><h4>Diamond Plan</h4><p>PKR 15,000 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 750</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row elite">
+          <div class="pr-left"><h4>Elite Plan</h4><p>PKR 30,000 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 1,500</div><div class="pr-daily">per day</div></div>
+        </div>
+        <div class="plan-row royal">
+          <div class="pr-left"><h4>Royal VIP Plan</h4><p>PKR 50,000 deposit</p></div>
+          <div class="pr-right"><div class="pr-roi">PKR 3,000</div><div class="pr-daily">per day</div></div>
+        </div>
+      </div>
+      <button class="submit-btn dep-submit" style="margin-top:16px;" onclick="closeModal('plansModal');openModal('depositModal')">Deposit to Activate</button>
+      <div style="height:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- REFERRAL MODAL -->
+<div class="modal-overlay" id="referralModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">Referral <span>Program</span></div>
+      <button class="modal-close" onclick="closeModal('referralModal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:48px; font-weight:900; color:var(--gold); line-height:1;">17%</div>
+        <div style="font-size:14px; color:var(--muted); margin-top:4px; font-weight:600;">Commission on every referral deposit</div>
+      </div>
+      <div class="ref-stats-grid">
+        <div class="ref-stat-card"><div class="rsc-val">0</div><div class="rsc-lbl">Total Referrals</div></div>
+        <div class="ref-stat-card"><div class="rsc-val">PKR 0</div><div class="rsc-lbl">Referral Earned</div></div>
+        <div class="ref-stat-card"><div class="rsc-val">0</div><div class="rsc-lbl">Active Refs</div></div>
+        <div class="ref-stat-card"><div class="rsc-val">17%</div><div class="rsc-lbl">Commission Rate</div></div>
+      </div>
+      <div class="info-box">
+        <strong>How Referral Works:</strong><br/>
+        1. Share your unique link with friends<br/>
+        2. Friend registers using your link<br/>
+        3. Friend makes a deposit (any plan)<br/>
+        4. You instantly earn <strong>17%</strong> of their deposit<br/>
+        5. No limit on number of referrals
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Referral Link</label>
+        <div class="ref-link-box" style="margin-top:0;">
+          <div class="ref-link-text">https://paakearnpro.pk/ref/USER123</div>
+          <button class="ref-copy-btn" onclick="copyRefLink()">Copy</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Referral Code</label>
+        <div style="background:var(--card2); border:1.5px solid var(--border); border-radius:12px; padding:13px 14px; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--gold); text-align:center; letter-spacing:4px;">USER123</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <button class="submit-btn dep-submit" style="margin-top:0;" onclick="showToast('Share link copied!')">Share Link</button>
+        <button class="submit-btn with-submit" style="margin-top:0;" onclick="showToast('Referral earnings withdrawn!')">Withdraw</button>
+      </div>
+      <div style="height:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title" id="loginTitle">Welcome <span>Back</span></div>
+      <button class="modal-close" onclick="closeModal('loginModal')">x</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; background:var(--card2); border-radius:12px; padding:4px; margin-bottom:20px; border:1px solid var(--border);">
+        <button id="loginTab" style="flex:1;padding:10px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:700;font-size:13px;cursor:pointer;font-family:'Poppins',sans-serif;" onclick="switchTab('login')">Login</button>
+        <button id="regTab" style="flex:1;padding:10px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;font-family:'Poppins',sans-serif;" onclick="switchTab('register')">Register Free</button>
+      </div>
+      <div id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input class="form-input" type="tel" placeholder="03XX-XXXXXXX"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="Enter your password"/>
+        </div>
+        <button class="submit-btn dep-submit" onclick="showToast('Login successful! Welcome back.')">Login to Account</button>
+        <div style="text-align:center; margin-top:12px; font-size:12px; color:var(--muted);">Forgot password? <span style="color:var(--gold); cursor:pointer;" onclick="showToast('Reset link sent to your number')">Reset Here</span></div>
+      </div>
+      <div id="registerForm" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" placeholder="Your full name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input class="form-input" type="tel" placeholder="03XX-XXXXXXX"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Create Password</label>
+          <input class="form-input" type="password" placeholder="Min 6 characters"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Referral Code (Optional)</label>
+          <input class="form-input" type="text" placeholder="Enter referral code"/>
+        </div>
+        <div class="info-box">
+          By registering, you agree to our Terms and Conditions. Registration is <strong>FREE</strong>.
+        </div>
+        <button class="submit-btn dep-submit" onclick="showToast('Account created successfully! Welcome to PakEarn Pro.')">Create Free Account</button>
+      </div>
+      <div style="height:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Modal
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow='';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', function(e) {
+      if(e.target === el) closeModal(el.id);
+    });
+  });
+
+  // Toast
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=> t.classList.remove('show'), 2800);
+  }
+
+  // Nav
+  function setNav(el) {
+    document.querySelectorAll('.nav-item').forEach(n => {
+      n.classList.remove('active');
+      var dot = n.querySelector('.nav-dot');
+      if(dot) dot.remove();
+    });
+    el.classList.add('active');
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    el.appendChild(dot);
+  }
+
+  // Payment method select
+  function selectPM(el, method) {
+    el.closest('.payment-methods').querySelectorAll('.pm-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    var info = el.closest('.modal-body').querySelector('#depMethodInfo');
+    if(info) {
+      var nums = {
+        'JazzCash':'03164511488',
+      };
+      info.innerHTML = '<strong>' + method + ' Account:</strong><br/>Name: PakEarn Pro<br/>Number: ' + nums[method] + '<br/><br/>Send your deposit and provide transaction ID below.';
+    }
+  }
+
+  // Referral copy
+  function copyRefLink() {
+    var txt = 'https://paakearnpro.pk/ref/USER123';
+    navigator.clipboard ? navigator.clipboard.writeText(txt) : (function(){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);})();
+    showToast('Referral link copied!');
+  }
+
+  // Calculator
+  var planRates = {
+    'free':   {daily:100,  deposit:0},
+    'silver': {daily:150,  deposit:500},
+    'gold':   {daily:600,  deposit:1500},
+    'platinum':{daily:2250, deposit:5000},
+    'diamond':{daily:7500, deposit:15000},
+    'royal':  {daily:30000,deposit:50000}
+  };
+  function calculateProfit() {
+    var plan = document.getElementById('calcPlan').value;
+    var amt = parseFloat(document.getElementById('calcAmt').value) || planRates[plan].deposit;
+    var rate = planRates[plan];
+    var daily = rate.daily;
+    var total = daily * 50;
+    var ref = Math.round(amt * 0.17);
+    var net = total + ref;
+    document.getElementById('crDaily').textContent = 'PKR ' + daily.toLocaleString('en-PK');
+    document.getElementById('crTotal').textContent = 'PKR ' + total.toLocaleString('en-PK');
+    document.getElementById('crRef').textContent = 'PKR ' + ref.toLocaleString('en-PK');
+    document.getElementById('crNet').textContent = 'PKR ' + net.toLocaleString('en-PK');
+  }
+  calculateProfit();
+
+  // Deposit/Withdraw submit
+  function submitDeposit() {
+    showToast('Deposit request submitted! Processing...');
+    setTimeout(()=> closeModal('depositModal'), 1200);
+  }
+  function submitWithdraw() {
+    showToast('Withdrawal request submitted!');
+    setTimeout(()=> closeModal('withdrawModal'), 1200);
+  }
+
+  // Login/Register tab switch
+  function switchTab(tab) {
+    if(tab==='login') {
+      document.getElementById('loginForm').style.display='block';
+      document.getElementById('registerForm').style.display='none';
+      document.getElementById('loginTitle').innerHTML='Welcome <span style="color:var(--gold)">Back</span>';
+      document.getElementById('loginTab').style.background='linear-gradient(135deg,var(--gold),var(--gold2))';
+      document.getElementById('loginTab').style.color='#000';
+      document.getElementById('regTab').style.background='transparent';
+      document.getElementById('regTab').style.color='var(--muted)';
+    } else {
+      document.getElementById('loginForm').style.display='none';
+      document.getElementById('registerForm').style.display='block';
+      document.getElementById('loginTitle').innerHTML='Create <span style="color:var(--gold)">Account</span>';
+      document.getElementById('regTab').style.background='linear-gradient(135deg,var(--gold),var(--gold2))';
+      document.getElementById('regTab').style.color='#000';
+      document.getElementById('loginTab').style.background='transparent';
+      document.getElementById('loginTab').style.color='var(--muted)';
+    }
+  }
+
+  // Counter animation for hero stats
+  document.addEventListener('DOMContentLoaded', function() {
+    var counters = [
+      {el: document.querySelectorAll('.hs-val')[0], target:17, suffix:'%'},
+      {el: document.querySelectorAll('.hs-val')[1], target:50, suffix:''},
+      {el: document.querySelectorAll('.hs-val')[2], target:0, suffix:''},
+      {el: document.querySelectorAll('.hs-val')[3], target:49, suffix:'', decimal:true}
+    ];
+    counters.forEach(function(c) {
+      if(!c.el) return;
+      var start = 0;
+      var duration = 1500;
+      var step = c.target / (duration / 16);
+      var cur = 0;
+      var timer = setInterval(function() {
+        cur = Math.min(cur + step, c.target);
+        c.el.textContent = c.decimal ? (cur/10).toFixed(1) : Math.floor(cur) + c.suffix;
+        if(cur >= c.target) { c.el.textContent = c.decimal ? '4.9' : c.target + c.suffix; clearInterval(timer); }
+      }, 16);
+    });
+  });
+</script>
+</body>
+</html>
